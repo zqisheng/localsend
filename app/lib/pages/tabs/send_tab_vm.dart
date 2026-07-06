@@ -132,6 +132,18 @@ final sendTabVmProvider = ViewProvider((ref) {
         if (result == true) {
           await ref.redux(favoritesProvider).dispatchAsync(RemoveFavoriteAction(deviceFingerprint: device.fingerprint));
         }
+      } else if (device.ip == null || device.ip!.isEmpty) {
+        // Signaling-only remote device: save by fingerprint without HTTP verification.
+        await ref.redux(favoritesProvider).dispatchAsync(
+          AddFavoriteAction(
+            FavoriteDevice.fromValues(
+              fingerprint: device.fingerprint,
+              ip: '',
+              port: device.port > 0 ? device.port : ref.read(settingsProvider).port,
+              alias: device.alias,
+            ),
+          ),
+        );
       } else {
         await showDialog(
           context: context,

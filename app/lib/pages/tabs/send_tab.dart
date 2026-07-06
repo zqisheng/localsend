@@ -560,7 +560,7 @@ class _MultiSendDeviceListTile extends StatelessWidget {
       progress: progress,
       isFavorite: isFavorite,
       nameOverride: nameOverride,
-      onFavoriteTap: device.ip == null ? null : () async => await vm.onToggleFavorite(context, device),
+      onFavoriteTap: () async => await vm.onToggleFavorite(context, device),
       onTap: () async => await vm.onTapDeviceMultiSend(context, device),
     );
   }

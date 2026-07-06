@@ -119,11 +119,13 @@ pub struct RegisterResponseDtoV2 {
 
     /// Fingerprint for device identification.
     /// Ignored in HTTPS mode (certificate is used instead).
-    #[serde(default)]
+    /// v3 protocol uses `token` instead of `fingerprint`.
+    #[serde(default, alias = "token")]
     pub fingerprint: String,
 
     /// Whether the download API (sections 5.2, 5.3) is active.
-    #[serde(default)]
+    /// v3 protocol uses `hasWebInterface` instead of `download`.
+    #[serde(default, alias = "hasWebInterface")]
     pub download: bool,
 }
 
@@ -253,6 +255,21 @@ mod tests {
         assert_eq!(dto.fingerprint, "random string");
         assert_eq!(dto.port, 53317);
         assert_eq!(dto.protocol, ProtocolTypeV2::Https);
+        assert!(dto.download);
+    }
+
+    #[test]
+    fn test_register_response_with_token_field() {
+        let json = r#"{
+            "alias": "Remote Device",
+            "version": "2.1",
+            "token": "remote-fingerprint",
+            "hasWebInterface": true
+        }"#;
+
+        let dto: RegisterResponseDtoV2 = serde_json::from_str(json).unwrap();
+        assert_eq!(dto.alias, "Remote Device");
+        assert_eq!(dto.fingerprint, "remote-fingerprint");
         assert!(dto.download);
     }
 

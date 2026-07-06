@@ -201,9 +201,16 @@ class StartFavoriteScan extends AsyncReduxAction<NearbyDevicesService, NearbyDev
     }
     dispatch(_SetRunningFavoriteScanAction(true));
 
+    final reachableFavorites = devices.where((e) => e.ip.isNotEmpty).map((e) => (e.ip, e.port)).toList();
+    if (reachableFavorites.isEmpty) {
+      return state.copyWith(
+        runningFavoriteScan: false,
+      );
+    }
+
     final stream = external(notifier._isolateController).dispatchTakeResult(
       IsolateFavoriteHttpDiscoveryAction(
-        favorites: devices.map((e) => (e.ip, e.port)).toList(),
+        favorites: reachableFavorites,
         https: https,
       ),
     );

@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/model/persistence/favorite_device.dart';
-import 'package:localsend_app/provider/device_info_provider.dart';
 import 'package:localsend_app/provider/favorites_provider.dart';
-import 'package:localsend_app/provider/http_provider.dart';
 import 'package:localsend_app/provider/settings_provider.dart';
-import 'package:localsend_app/rust/api/model.dart';
+import 'package:localsend_app/util/favorite_register_helper.dart';
 import 'package:localsend_app/util/rust.dart';
 import 'package:localsend_app/widget/dialogs/error_dialog.dart';
 import 'package:localsend_app/widget/dialogs/favorite_edit_dialog.dart';
@@ -32,20 +30,14 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
       _fetching = true;
     });
 
-    final https = ref.read(settingsProvider).https;
-
     try {
-      final payload = ref.read(deviceFullInfoProvider).toRegisterDto();
-      final response = await ref
-          .read(httpProvider)
-          .v2
-          .register(
-        protocol: https ? ProtocolType.https : ProtocolType.http,
+      final response = await registerDeviceForFavorite(
+        ref: ref,
         ip: favorite.ip,
         port: favorite.port,
-        payload: payload,
       );
 
+      final https = ref.read(settingsProvider).https;
       final device = response.body.toDevice(favorite.ip, favorite.port, https, HttpDiscovery(ip: favorite.ip));
 
       if (mounted) {
