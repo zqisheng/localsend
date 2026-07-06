@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.DocumentsContract
 import android.provider.Settings
 import io.flutter.embedding.android.FlutterActivity
@@ -70,6 +71,29 @@ class MainActivity : FlutterActivity() {
 
                 "isAnimationsEnabled" -> {
                     result.success(isAnimationsEnabled())
+                }
+
+                "startKeepAlive" -> {
+                    KeepAliveService.start(this)
+                    result.success(null)
+                }
+
+                "stopKeepAlive" -> {
+                    KeepAliveService.stop(this)
+                    result.success(null)
+                }
+
+                "isKeepAliveRunning" -> {
+                    result.success(KeepAliveService.isRunning)
+                }
+
+                "requestAddQuickTile" -> {
+                    requestAddQuickTile(result)
+                }
+
+                "requestIgnoreBatteryOptimizations" -> {
+                    requestIgnoreBatteryOptimizations()
+                    result.success(null)
                 }
 
                 else -> result.notImplemented()
@@ -270,6 +294,38 @@ class MainActivity : FlutterActivity() {
         intent.action = Intent.ACTION_VIEW
         intent.type = "image/*"
         startActivity(intent)
+    }
+
+    private fun requestAddQuickTile(result: MethodChannel.Result) {
+        try {
+            openQuickSettingsPanel()
+            result.success(false)
+        } catch (_: Exception) {
+            result.success(false)
+        }
+    }
+
+    @Suppress("DiscouragedPrivateApi")
+    private fun openQuickSettingsPanel() {
+        try {
+            val statusBarService = getSystemService("statusbar")
+            val statusBarManager = Class.forName("android.app.StatusBarManager")
+            val expand = statusBarManager.getMethod("expandSettingsPanel")
+            expand.invoke(statusBarService)
+        } catch (_: Exception) {
+            startActivity(Intent(Settings.ACTION_SETTINGS))
+        }
+    }
+
+    private fun requestIgnoreBatteryOptimizations() {
+        val packageName = packageName
+        val powerManager = getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
+        if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                data = Uri.parse("package:$packageName")
+            }
+            startActivity(intent)
+        }
     }
 }
 

@@ -120,7 +120,12 @@
       "destination": "保存目录",
       "downloads": "(下载)",
       "saveToGallery": "保存到相册",
-      "saveToHistory": "保存到历史记录"
+      "saveToHistory": "保存到历史记录",
+      "backgroundKeepAlive": "后台保活",
+      "quickSettingsTile": "下拉快捷方式",
+      "addQuickSettingsTile": "添加到面板",
+      "quickSettingsTileAdded": "已添加下拉快捷方式",
+      "quickSettingsTileHint": "请下拉打开快捷设置，点击「编辑」，然后添加 LocalSend 磁贴"
     },
     "send": {
       "title": "发送",
@@ -451,6 +456,10 @@
     "quickSaveNotice": {
       "title": "@:general.quickSave",
       "content": "自动接受所有文件传输请求。请注意，这会让此网络中的所有人都可以向你发送文件。"
+    },
+    "backgroundKeepAliveNotice": {
+      "title": "后台保活",
+      "content": "LocalSend 将通过常驻通知在后台保持运行。建议同时开启「快速保存」，以便在后台自动接收并下载文件。你也可以添加下拉快捷方式，方便快速打开应用。"
     },
     "quickSaveFromFavoritesNotice": {
       "title": "@:general.quickSaveFromFavorites",

@@ -22,6 +22,9 @@ import 'package:localsend_app/util/native/macos_channel.dart';
 import 'package:localsend_app/util/native/pick_directory_path.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/widget/custom_dropdown_button.dart';
+import 'package:localsend_app/util/native/keep_alive_helper.dart';
+import 'package:localsend_app/util/ui/snackbar.dart';
+import 'package:localsend_app/widget/dialogs/background_keep_alive_notice.dart';
 import 'package:localsend_app/widget/dialogs/encryption_disabled_notice.dart';
 import 'package:localsend_app/widget/dialogs/pin_dialog.dart';
 import 'package:localsend_app/widget/dialogs/quick_save_from_favorites_notice.dart';
@@ -250,6 +253,33 @@ class SettingsTab extends StatelessWidget {
                           await ref.notifier(settingsProvider).setSaveToHistory(b);
                         },
                       ),
+                      if (checkPlatform([TargetPlatform.android])) ...[
+                        _BooleanEntry(
+                          label: t.settingsTab.receive.backgroundKeepAlive,
+                          value: vm.settings.backgroundKeepAlive,
+                          onChanged: (b) async {
+                            final old = vm.settings.backgroundKeepAlive;
+                            await ref.notifier(settingsProvider).setBackgroundKeepAlive(b);
+                            if (!old && b && context.mounted) {
+                              await BackgroundKeepAliveNotice.open(context);
+                            }
+                          },
+                        ),
+                        _ButtonEntry(
+                          label: t.settingsTab.receive.quickSettingsTile,
+                          buttonLabel: t.settingsTab.receive.addQuickSettingsTile,
+                          onTap: () async {
+                            final added = await requestAddQuickTile();
+                            if (context.mounted) {
+                              context.showSnackBar(
+                                added
+                                    ? t.settingsTab.receive.quickSettingsTileAdded
+                                    : t.settingsTab.receive.quickSettingsTileHint,
+                              );
+                            }
+                          },
+                        ),
+                      ],
                     ],
                   ),
                   if (vm.advanced)

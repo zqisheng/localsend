@@ -7,6 +7,7 @@ import 'package:localsend_app/model/persistence/color_mode.dart';
 import 'package:localsend_app/model/send_mode.dart';
 import 'package:localsend_app/model/state/settings_state.dart';
 import 'package:localsend_app/provider/persistence_provider.dart';
+import 'package:localsend_app/util/native/keep_alive_helper.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
 final _listEq = const ListEquality().equals;
@@ -70,6 +71,7 @@ class SettingsService extends PureNotifier<SettingsState> {
     shareViaLinkAutoAccept: _persistence.getShareViaLinkAutoAccept(),
     discoveryTimeout: _persistence.getDiscoveryTimeout(),
     advancedSettings: _persistence.getAdvancedSettingsEnabled(),
+    backgroundKeepAlive: _persistence.isBackgroundKeepAlive(),
   );
 
   Future<void> setAlias(String alias) async {
@@ -246,5 +248,13 @@ class SettingsService extends PureNotifier<SettingsState> {
     state = state.copyWith(
       shareViaLinkAutoAccept: shareViaLinkAutoAccept,
     );
+  }
+
+  Future<void> setBackgroundKeepAlive(bool backgroundKeepAlive) async {
+    await _persistence.setBackgroundKeepAlive(backgroundKeepAlive);
+    state = state.copyWith(
+      backgroundKeepAlive: backgroundKeepAlive,
+    );
+    await syncBackgroundKeepAlive(backgroundKeepAlive);
   }
 }

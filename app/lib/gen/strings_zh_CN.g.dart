@@ -327,11 +327,8 @@ class _TranslationsReceivePageZhCn extends TranslationsReceivePageEn {
 
   // Translations
   @override
-  String subTitle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(
-    n,
-    one: '想要发送给你一个文件',
-    other: '想要发送给你 ${n} 个文件',
-  );
+  String subTitle({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(n, one: '想要发送给你一个文件', other: '想要发送给你 ${n} 个文件');
   @override
   String get subTitleMessage => '发送给你了一条消息：';
   @override
@@ -411,11 +408,8 @@ class _TranslationsWebSharePageZhCn extends TranslationsWebSharePageEn {
   @override
   String get error => '在启动服务器过程中发生了错误。';
   @override
-  String openLink({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(
-    n,
-    one: '在浏览器中打开链接：',
-    other: '在浏览器中打开其中一个链接：',
-  );
+  String openLink({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('zh'))(n, one: '在浏览器中打开链接：', other: '在浏览器中打开其中一个链接：');
   @override
   String get requests => '请求';
   @override
@@ -618,6 +612,8 @@ class _TranslationsDialogsZhCn extends TranslationsDialogsEn {
   late final _TranslationsDialogsQuickActionsZhCn quickActions = _TranslationsDialogsQuickActionsZhCn._(_root);
   @override
   late final _TranslationsDialogsQuickSaveNoticeZhCn quickSaveNotice = _TranslationsDialogsQuickSaveNoticeZhCn._(_root);
+  @override
+  late final _TranslationsDialogsBackgroundKeepAliveNoticeZhCn backgroundKeepAliveNotice = _TranslationsDialogsBackgroundKeepAliveNoticeZhCn._(_root);
   @override
   late final _TranslationsDialogsQuickSaveFromFavoritesNoticeZhCn quickSaveFromFavoritesNotice =
       _TranslationsDialogsQuickSaveFromFavoritesNoticeZhCn._(_root);
@@ -909,6 +905,16 @@ class _TranslationsSettingsTabReceiveZhCn extends TranslationsSettingsTabReceive
   String get saveToGallery => '保存到相册';
   @override
   String get saveToHistory => '保存到历史记录';
+  @override
+  String get backgroundKeepAlive => '后台保活';
+  @override
+  String get quickSettingsTile => '下拉快捷方式';
+  @override
+  String get addQuickSettingsTile => '添加到面板';
+  @override
+  String get quickSettingsTileAdded => '已添加下拉快捷方式';
+  @override
+  String get quickSettingsTileHint => '请下拉打开快捷设置，点击「编辑」，然后添加 LocalSend 磁贴';
 }
 
 // Path: settingsTab.send
@@ -1382,6 +1388,19 @@ class _TranslationsDialogsQuickSaveNoticeZhCn extends TranslationsDialogsQuickSa
   String get content => '自动接受所有文件传输请求。请注意，这会让此网络中的所有人都可以向你发送文件。';
 }
 
+// Path: dialogs.backgroundKeepAliveNotice
+class _TranslationsDialogsBackgroundKeepAliveNoticeZhCn extends TranslationsDialogsBackgroundKeepAliveNoticeEn {
+  _TranslationsDialogsBackgroundKeepAliveNoticeZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
+
+  final TranslationsZhCn _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => '后台保活';
+  @override
+  String get content => 'LocalSend 将通过常驻通知在后台保持运行。建议同时开启「快速保存」，以便在后台自动接收并下载文件。你也可以添加下拉快捷方式，方便快速打开应用。';
+}
+
 // Path: dialogs.quickSaveFromFavoritesNotice
 class _TranslationsDialogsQuickSaveFromFavoritesNoticeZhCn extends TranslationsDialogsQuickSaveFromFavoritesNoticeEn {
   _TranslationsDialogsQuickSaveFromFavoritesNoticeZhCn._(TranslationsZhCn root) : this._root = root, super.internal(root);
@@ -1392,11 +1411,7 @@ class _TranslationsDialogsQuickSaveFromFavoritesNoticeZhCn extends TranslationsD
   @override
   String get title => _root.general.quickSaveFromFavorites;
   @override
-  List<String> get content => [
-    '当前会自动接受收藏夹中设备的文件请求。',
-    '警告：这目前并非绝对安全，知道您收藏夹列表中的设备指纹被黑客窃取，其仍可以向您发送文件。',
-    '但是，此选项比“允许任何设备”更安全。',
-  ];
+  List<String> get content => ['当前会自动接受收藏夹中设备的文件请求。', '警告：这目前并非绝对安全，知道您收藏夹列表中的设备指纹被黑客窃取，其仍可以向您发送文件。', '但是，此选项比“允许任何设备”更安全。'];
 }
 
 // Path: dialogs.pin

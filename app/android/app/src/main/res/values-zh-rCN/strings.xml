@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_alive_channel_name">后台服务</string>
+    <string name="keep_alive_channel_description">保持 LocalSend 在后台运行以接收文件</string>
+    <string name="keep_alive_notification_title">LocalSend 正在后台运行</string>
+    <string name="keep_alive_notification_text">已准备好接收局域网内的文件</string>
+    <string name="quick_tile_keep_alive_active">保活：已开启</string>
+    <string name="quick_tile_keep_alive_inactive">保活：已关闭</string>
+</resources>

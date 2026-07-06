@@ -392,11 +392,8 @@ class TranslationsReceivePageEn {
   // Translations
 
   /// en: '(one) {wants to send you a file} (other) {wants to send you {n} files}'
-  String subTitle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
-    n,
-    one: 'wants to send you a file',
-    other: 'wants to send you ${n} files',
-  );
+  String subTitle({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n, one: 'wants to send you a file', other: 'wants to send you ${n} files');
 
   /// en: 'sent you a message:'
   String get subTitleMessage => 'sent you a message:';
@@ -701,6 +698,9 @@ class TranslationsDialogsEn {
   late final TranslationsDialogsQrEn qr = TranslationsDialogsQrEn.internal(_root);
   late final TranslationsDialogsQuickActionsEn quickActions = TranslationsDialogsQuickActionsEn.internal(_root);
   late final TranslationsDialogsQuickSaveNoticeEn quickSaveNotice = TranslationsDialogsQuickSaveNoticeEn.internal(_root);
+  late final TranslationsDialogsBackgroundKeepAliveNoticeEn backgroundKeepAliveNotice = TranslationsDialogsBackgroundKeepAliveNoticeEn.internal(
+    _root,
+  );
   late final TranslationsDialogsQuickSaveFromFavoritesNoticeEn quickSaveFromFavoritesNotice =
       TranslationsDialogsQuickSaveFromFavoritesNoticeEn.internal(_root);
   late final TranslationsDialogsPinEn pin = TranslationsDialogsPinEn.internal(_root);
@@ -1049,6 +1049,21 @@ class TranslationsSettingsTabReceiveEn {
 
   /// en: 'Save to history'
   String get saveToHistory => 'Save to history';
+
+  /// en: 'Background keep-alive'
+  String get backgroundKeepAlive => 'Background keep-alive';
+
+  /// en: 'Quick settings tile'
+  String get quickSettingsTile => 'Quick settings tile';
+
+  /// en: 'Add to panel'
+  String get addQuickSettingsTile => 'Add to panel';
+
+  /// en: 'Quick settings tile added'
+  String get quickSettingsTileAdded => 'Quick settings tile added';
+
+  /// en: 'Open quick settings, tap Edit, then add the LocalSend tile'
+  String get quickSettingsTileHint => 'Open quick settings, tap Edit, then add the LocalSend tile';
 }
 
 // Path: settingsTab.send
@@ -1620,6 +1635,22 @@ class TranslationsDialogsQuickSaveNoticeEn {
 
   /// en: 'File requests are now accepted automatically. Be aware that everyone on the local network can send you files.'
   String get content => 'File requests are now accepted automatically. Be aware that everyone on the local network can send you files.';
+}
+
+// Path: dialogs.backgroundKeepAliveNotice
+class TranslationsDialogsBackgroundKeepAliveNoticeEn {
+  TranslationsDialogsBackgroundKeepAliveNoticeEn.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Background keep-alive'
+  String get title => 'Background keep-alive';
+
+  /// en: 'LocalSend will keep running in the background via a persistent notification. Enable "Quick Save" to automatically accept and download files while the app is in the background. You can also add a quick settings tile for fast access.'
+  String get content =>
+      'LocalSend will keep running in the background via a persistent notification. Enable "Quick Save" to automatically accept and download files while the app is in the background. You can also add a quick settings tile for fast access.';
 }
 
 // Path: dialogs.quickSaveFromFavoritesNotice

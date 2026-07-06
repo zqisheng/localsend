@@ -42,6 +42,7 @@ import 'package:localsend_app/util/native/content_uri_helper.dart';
 import 'package:localsend_app/util/native/context_menu_helper.dart';
 import 'package:localsend_app/util/native/cross_file_converters.dart';
 import 'package:localsend_app/util/native/device_info_helper.dart';
+import 'package:localsend_app/util/native/keep_alive_helper.dart';
 import 'package:localsend_app/util/native/macos_channel.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/native/tray_helper.dart';
@@ -208,6 +209,10 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
       await FlutterDisplayMode.setHighRefreshRate();
     } catch (e) {
       _logger.warning('Setting high refresh rate failed', e);
+    }
+
+    if (ref.read(settingsProvider).backgroundKeepAlive) {
+      await syncBackgroundKeepAlive(true);
     }
   }
 

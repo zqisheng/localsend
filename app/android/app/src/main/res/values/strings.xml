@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keep_alive_channel_name">Background Service</string>
+    <string name="keep_alive_channel_description">Keeps LocalSend running in the background to receive files</string>
+    <string name="keep_alive_notification_title">LocalSend is running in background</string>
+    <string name="keep_alive_notification_text">Ready to receive files on the local network</string>
+    <string name="quick_tile_keep_alive_active">Keep-alive: On</string>
+    <string name="quick_tile_keep_alive_inactive">Keep-alive: Off</string>
+</resources>

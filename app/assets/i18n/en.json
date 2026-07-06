@@ -120,7 +120,12 @@
       "destination": "Save to folder",
       "downloads": "(Downloads)",
       "saveToGallery": "Save media to gallery",
-      "saveToHistory": "Save to history"
+      "saveToHistory": "Save to history",
+      "backgroundKeepAlive": "Background keep-alive",
+      "quickSettingsTile": "Quick settings tile",
+      "addQuickSettingsTile": "Add to panel",
+      "quickSettingsTileAdded": "Quick settings tile added",
+      "quickSettingsTileHint": "Open quick settings, tap Edit, then add the LocalSend tile"
     },
     "send": {
       "title": "Send",
@@ -459,6 +464,10 @@
     "quickSaveNotice": {
       "title": "@:general.quickSave",
       "content": "File requests are now accepted automatically. Be aware that everyone on the local network can send you files."
+    },
+    "backgroundKeepAliveNotice": {
+      "title": "Background keep-alive",
+      "content": "LocalSend will keep running in the background via a persistent notification. Enable \"Quick Save\" to automatically accept and download files while the app is in the background. You can also add a quick settings tile for fast access."
     },
     "quickSaveFromFavoritesNotice": {
       "title": "@:general.quickSaveFromFavorites",

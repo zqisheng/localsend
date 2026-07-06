@@ -90,6 +90,7 @@ const _deviceType = 'ls_device_type';
 const _deviceModel = 'ls_device_model';
 const _shareViaLinkAutoAccept = 'ls_share_via_link_auto_accept';
 const _advancedSettingsKey = 'ls_advanced_settings';
+const _backgroundKeepAlive = 'ls_background_keep_alive';
 
 final persistenceProvider = Provider<PersistenceService>((ref) {
   throw Exception('persistenceProvider not initialized');
@@ -409,6 +410,14 @@ class PersistenceService {
 
   Future<void> setAdvancedSettingsEnabled(bool isEnabled) async {
     await _prefs.setBool(_advancedSettingsKey, isEnabled);
+  }
+
+  bool isBackgroundKeepAlive() {
+    return _prefs.getBool(_backgroundKeepAlive) ?? false;
+  }
+
+  Future<void> setBackgroundKeepAlive(bool enabled) async {
+    await _prefs.setBool(_backgroundKeepAlive, enabled);
   }
 
   bool isQuickSave() {
